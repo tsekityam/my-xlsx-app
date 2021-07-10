@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Button } from "@material-ui/core";
 import XLSX from "xlsx";
 import CollapsibleTable from "./CollapsibleTable";
-import { IEmployeeRow, parseEmployeeRows } from "./data";
+import { IEmployeeData, IEmployeeRow, parseEmployeeRows } from "./data";
 
 function App() {
+  const [employees, setEmployees] = useState<IEmployeeData[]>([]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -29,7 +31,8 @@ function App() {
                     var result: IEmployeeRow[] = XLSX.utils.sheet_to_json(
                       workbook.Sheets[sheetName]
                     );
-                    parseEmployeeRows(result);
+
+                    setEmployees(parseEmployeeRows(result));
                   });
                 };
               }
@@ -37,7 +40,7 @@ function App() {
           />
         </Button>
       </header>
-      <CollapsibleTable />
+      <CollapsibleTable data={employees} />
     </div>
   );
 }

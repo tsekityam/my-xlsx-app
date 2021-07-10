@@ -6,9 +6,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Row } from "./Row";
-import { getRows } from "./data";
+import { IEmployeeData } from "./data";
 
-export default function CollapsibleTable() {
+export default function CollapsibleTable(props: {data: IEmployeeData[]}) {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -23,8 +23,8 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {getRows().map((row) => (
-            <Row key={row.name} row={row} />
+          {props.data.map((row) => (
+            <Row key={row["Employee Number"]} row={row} />
           ))}
         </TableBody>
       </Table>
