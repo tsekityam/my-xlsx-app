@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Button, Input } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import XLSX from "xlsx";
 import CollapsibleTable from "./CollapsibleTable";
 import { IEmployeeData, IEmployeeRow, parseEmployeeRows } from "./data";
@@ -13,14 +13,11 @@ function App() {
       <header className="App-header">
         <Button color="primary" variant="contained" component="label">
           Upload File
-          <Input
+          <input
             hidden
             type="file"
-            inputProps={{
-              // accept:"application/vnd.ms-excel"
-              accept:
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            }}
+            // accept="application/vnd.ms-excel"
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.files) {
                 const reader = new FileReader();
