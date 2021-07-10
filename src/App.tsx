@@ -1,17 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Button } from "@material-ui/core";
 import XLSX from "xlsx";
+import CollapsibleTable from "./CollapsibleTable";
+import { IEmployeeRow, parseEmployeeRows } from "./data";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Upload .XLSX that contains employee information
-        </p>
         <Button color="primary" variant="contained" component="label">
           Upload File
           <input
@@ -29,10 +26,10 @@ function App() {
                     type: "binary",
                   });
                   workbook.SheetNames.forEach(function (sheetName) {
-                    var result = XLSX.utils.sheet_to_json(
+                    var result: IEmployeeRow[] = XLSX.utils.sheet_to_json(
                       workbook.Sheets[sheetName]
                     );
-                    console.log(result);
+                    parseEmployeeRows(result);
                   });
                 };
               }
@@ -40,6 +37,7 @@ function App() {
           />
         </Button>
       </header>
+      <CollapsibleTable />
     </div>
   );
 }
